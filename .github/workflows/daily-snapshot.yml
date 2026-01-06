@@ -23,11 +23,9 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: pendle-calculator
         run: npm ci --production=false
 
       - name: Capture and save snapshot
-        working-directory: pendle-calculator
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
