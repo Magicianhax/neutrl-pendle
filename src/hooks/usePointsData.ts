@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 const POINTS_CACHE_KEY = "points_data_cache";
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 interface PointsData {
   timestamp: string;
@@ -105,7 +105,7 @@ export function usePointsData() {
     fetchData();
   }, [fetchData]);
 
-  // Auto-refresh every 10 minutes
+  // Auto-refresh every 1 hour
   useEffect(() => {
     const interval = setInterval(() => fetchData(true), CACHE_TTL_MS);
     return () => clearInterval(interval);

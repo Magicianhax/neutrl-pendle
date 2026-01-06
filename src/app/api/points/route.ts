@@ -5,8 +5,12 @@ const API_URL =
 
 const ETHEREUM_SEASON_ID = "ethereum-1-seasonProgram-Season_Neutrl_Origin";
 
-// Cache TTL in milliseconds (5 minutes)
-const CACHE_TTL = 5 * 60 * 1000;
+// Cache TTL in milliseconds (1 hour)
+const CACHE_TTL = 60 * 60 * 1000;
+
+// Retry configuration for 429 errors
+const MAX_RETRIES = 3;
+const INITIAL_RETRY_DELAY = 2000; // 2 seconds
 
 interface CachedData {
   timestamp: string;
@@ -23,6 +27,9 @@ interface Cache {
 
 // In-memory cache
 let cache: Cache = { data: null, expires: 0 };
+
+// Fetch lock to prevent concurrent requests
+let fetchInProgress: Promise<CachedData> | null = null;
 
 interface SeasonProgramState {
   __typename: string;
@@ -54,14 +61,19 @@ function formatLargeNumber(num: number): string {
   return num.toFixed(2);
 }
 
-async function fetchWithPuppeteer(): Promise<CachedData> {
+// Helper function to delay execution
+function delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchWithPuppeteer(retryCount = 0): Promise<CachedData> {
   // Dynamic import puppeteer only when needed
   const puppeteer = await import("puppeteer");
   const { execSync } = await import("child_process");
 
   // Determine executable path - check environment variable first
   let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-  
+
   // If not set, try to find chromium in PATH (for Railway/Nix)
   if (!executablePath) {
     try {
@@ -109,8 +121,24 @@ async function fetchWithPuppeteer(): Promise<CachedData> {
       timeout: 30000,
     });
 
+    const status = response?.status();
+
+    // Handle 429 rate limit with retry
+    if (status === 429) {
+      await browser.close();
+
+      if (retryCount < MAX_RETRIES) {
+        const retryDelay = INITIAL_RETRY_DELAY * Math.pow(2, retryCount);
+        console.log(`Rate limited (429). Retrying in ${retryDelay}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+        await delay(retryDelay);
+        return fetchWithPuppeteer(retryCount + 1);
+      }
+
+      throw new Error(`HTTP error! Status: 429 (Rate limited after ${MAX_RETRIES} retries)`);
+    }
+
     if (!response || !response.ok()) {
-      throw new Error(`HTTP error! Status: ${response?.status()}`);
+      throw new Error(`HTTP error! Status: ${status}`);
     }
 
     const data: NeutrlAPIResponse = await response.json();
@@ -152,20 +180,55 @@ export async function GET() {
       });
     }
 
+    // Use fetch lock to prevent concurrent requests
+    // If a fetch is already in progress, wait for it instead of making a new request
+    if (fetchInProgress) {
+      console.log("Fetch already in progress, waiting for result...");
+      try {
+        const freshData = await fetchInProgress;
+        return NextResponse.json({
+          ...freshData,
+          isCached: true,
+          cacheExpiresIn: Math.round((cache.expires - Date.now()) / 1000),
+        });
+      } catch (error) {
+        // If the in-progress fetch failed, fall through to error handling
+        console.error("In-progress fetch failed:", error);
+        if (cache.data) {
+          return NextResponse.json({
+            ...cache.data,
+            isCached: true,
+            isStale: true,
+            error: "Failed to refresh, returning stale data",
+          });
+        }
+        throw error;
+      }
+    }
+
     console.log("Fetching fresh data from Neutrl API...");
-    const freshData = await fetchWithPuppeteer();
 
-    // Update cache
-    cache = {
-      data: freshData,
-      expires: Date.now() + CACHE_TTL,
-    };
+    // Set the fetch lock
+    fetchInProgress = fetchWithPuppeteer();
 
-    return NextResponse.json({
-      ...freshData,
-      isCached: false,
-      cacheExpiresIn: Math.round(CACHE_TTL / 1000),
-    });
+    try {
+      const freshData = await fetchInProgress;
+
+      // Update cache
+      cache = {
+        data: freshData,
+        expires: Date.now() + CACHE_TTL,
+      };
+
+      return NextResponse.json({
+        ...freshData,
+        isCached: false,
+        cacheExpiresIn: Math.round(CACHE_TTL / 1000),
+      });
+    } finally {
+      // Always clear the fetch lock
+      fetchInProgress = null;
+    }
   } catch (error) {
     console.error("Error fetching from Neutrl:", error);
 
