@@ -1,9 +1,9 @@
 name: Daily TVL Snapshot
 
 on:
-  # Run daily at 1:05 PM UTC
+  # Run daily at 1:20 PM UTC
   schedule:
-    - cron: '5 13 * * *'
+    - cron: '20 13 * * *'
 
   # Allow manual trigger
   workflow_dispatch:
