@@ -1,0 +1,712 @@
+[
+  {
+    "capturedAt": "2026-01-03T18:01:41.105Z",
+    "capturedAtUnix": 1767463301,
+    "summary": {
+      "s1RewardsIssued": 578641003932.0181,
+      "s1RewardsIssuedFormatted": "578.64B",
+      "participantCount": 3659,
+      "totalTvl": 374646490.6675557,
+      "totalTvlFormatted": "374.65M",
+      "weightedTvl": 9635783575.119228,
+      "weightedTvlFormatted": "9.64B",
+      "estDailyPoints": 9635783575.119228,
+      "estDailyPointsFormatted": "9.64B",
+      "estWeeklyPoints": 67450485025.834595,
+      "estWeeklyPointsFormatted": "67.45B",
+      "estMonthlyPoints": 289073507253.57684,
+      "estMonthlyPointsFormatted": "289.07B"
+    },
+    "tableCondensed": [
+      {
+        "category": "FEBRUARY 26, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-nusd-feb26",
+            "tvlAmount": 19107375.07614443,
+            "weightedTvl": 955368753.8072215,
+            "dailyPoints": 955368753.8072215,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-nusd",
+            "tvlAmount": 955368.7538072215,
+            "weightedTvl": 47768437.690361075,
+            "dailyPoints": 47768437.690361075,
+            "share": 0
+          },
+          {
+            "id": "yt-nusd-feb26-net",
+            "tvlAmount": 18152006.32233721,
+            "weightedTvl": 907600316.1168605,
+            "dailyPoints": 907600316.1168605,
+            "share": 9.41906082718997
+          },
+          {
+            "id": "lp-nusd-feb26",
+            "tvlAmount": 24608155.898719713,
+            "weightedTvl": 1230407794.9359856,
+            "dailyPoints": 1230407794.9359856,
+            "share": 12.76915141715147
+          },
+          {
+            "id": "pt-nusd-feb26",
+            "tvlAmount": 18872864.464387707,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "MARCH 5, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-snusd-mar26",
+            "tvlAmount": 33583413.149361245,
+            "weightedTvl": 839585328.7340311,
+            "dailyPoints": 839585328.7340311,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-snusd",
+            "tvlAmount": 1679170.6574680624,
+            "weightedTvl": 41979266.43670156,
+            "dailyPoints": 41979266.43670156,
+            "share": 0
+          },
+          {
+            "id": "yt-snusd-mar26-net",
+            "tvlAmount": 31904242.49189318,
+            "weightedTvl": 797606062.2973295,
+            "dailyPoints": 797606062.2973295,
+            "share": 8.2775423096555
+          },
+          {
+            "id": "lp-snusd-mar26",
+            "tvlAmount": 24633759.977371655,
+            "weightedTvl": 615843999.4342914,
+            "dailyPoints": 615843999.4342914,
+            "share": 6.391218676024188
+          },
+          {
+            "id": "pt-snusd-mar26",
+            "tvlAmount": 32242275.261122625,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "HOLD",
+        "rows": [
+          {
+            "id": "hold-nusd",
+            "tvlAmount": 109514050.13417149,
+            "weightedTvl": 547570250.6708574,
+            "dailyPoints": 547570250.6708574,
+            "share": 5.6826748587914615
+          },
+          {
+            "id": "lock-nusd-3mo",
+            "tvlAmount": 4657442.71516972,
+            "weightedTvl": 139723281.4550916,
+            "dailyPoints": 139723281.4550916,
+            "share": 1.4500458666991463
+          },
+          {
+            "id": "lock-nusd-6mo",
+            "tvlAmount": 39526828.72019859,
+            "weightedTvl": 2964512154.014894,
+            "dailyPoints": 2964512154.014894,
+            "share": 30.7656573116651
+          },
+          {
+            "id": "lock-nusd-9mo",
+            "tvlAmount": 1953087.2094008229,
+            "weightedTvl": 244135901.17510286,
+            "dailyPoints": 244135901.17510286,
+            "share": 2.533638279355834
+          },
+          {
+            "id": "lock-nusd-12mo",
+            "tvlAmount": 886967.7704870225,
+            "weightedTvl": 133045165.57305337,
+            "dailyPoints": 133045165.57305337,
+            "share": 1.3807404923102702
+          },
+          {
+            "id": "hold-snusd",
+            "tvlAmount": 35176199.123787686,
+            "weightedTvl": 35176199.123787686,
+            "dailyPoints": 35176199.123787686,
+            "share": 0.3650580033222927
+          },
+          {
+            "id": "lock-snusd-3mo",
+            "tvlAmount": 2152333.513774974,
+            "weightedTvl": 17218668.11019979,
+            "dailyPoints": 17218668.11019979,
+            "share": 0.1786950482642688
+          },
+          {
+            "id": "lock-snusd-6mo",
+            "tvlAmount": 10157537.133394139,
+            "weightedTvl": 203150742.66788277,
+            "dailyPoints": 203150742.66788277,
+            "share": 2.1082949931798263
+          },
+          {
+            "id": "lock-snusd-9mo",
+            "tvlAmount": 675302.5372596566,
+            "weightedTvl": 20259076.117789697,
+            "dailyPoints": 20259076.117789697,
+            "share": 0.21024835146880122
+          },
+          {
+            "id": "lock-snusd-12mo",
+            "tvlAmount": 514244.33712296706,
+            "weightedTvl": 20569773.484918684,
+            "dailyPoints": 20569773.484918684,
+            "share": 0.21347276352316957
+          },
+          {
+            "id": "hold-curve-lp",
+            "tvlAmount": 9153186.953779444,
+            "weightedTvl": 45765934.76889722,
+            "dailyPoints": 45765934.76889722,
+            "share": 0.4749581018721764
+          },
+          {
+            "id": "curve-nusd-breakdown",
+            "tvlAmount": 4777420.455209401,
+            "weightedTvl": 23887102.276047006,
+            "dailyPoints": 23887102.276047006,
+            "share": 0
+          },
+          {
+            "id": "curve-usdc-breakdown",
+            "tvlAmount": 4636115.2308,
+            "weightedTvl": 23180576.154,
+            "dailyPoints": 23180576.154,
+            "share": 0
+          },
+          {
+            "id": "lock-curve-3mo",
+            "tvlAmount": 50.00466729242069,
+            "weightedTvl": 1000.0933458484138,
+            "dailyPoints": 1000.0933458484138,
+            "share": 0.000010378951935271535
+          },
+          {
+            "id": "lock-curve-6mo",
+            "tvlAmount": 260298.72756266507,
+            "weightedTvl": 13014936.378133254,
+            "dailyPoints": 13014936.378133254,
+            "share": 0.13506879099837207
+          },
+          {
+            "id": "hold-upnusd",
+            "tvlAmount": 60720797.0964574,
+            "weightedTvl": 1700182318.700807,
+            "dailyPoints": 1700182318.700807,
+            "share": 17.644463529576214
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "capturedAt": "2026-01-04T13:42:35.331Z",
+    "capturedAtUnix": 1767534155,
+    "summary": {
+      "s1RewardsIssued": 584452346843.8018,
+      "s1RewardsIssuedFormatted": "584.45B",
+      "participantCount": 3691,
+      "totalTvl": 370069831.0086716,
+      "totalTvlFormatted": "370.07M",
+      "weightedTvl": 9402305790.533575,
+      "weightedTvlFormatted": "9.40B",
+      "estDailyPoints": 9402305790.533575,
+      "estDailyPointsFormatted": "9.40B",
+      "estWeeklyPoints": 65816140533.73502,
+      "estWeeklyPointsFormatted": "65.82B",
+      "estMonthlyPoints": 282069173716.00726,
+      "estMonthlyPointsFormatted": "282.07B"
+    },
+    "tableCondensed": [
+      {
+        "category": "FEBRUARY 26, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-nusd-feb26",
+            "tvlAmount": 19144565.78364784,
+            "weightedTvl": 957228289.182392,
+            "dailyPoints": 957228289.182392,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-nusd",
+            "tvlAmount": 957228.289182392,
+            "weightedTvl": 47861414.459119596,
+            "dailyPoints": 47861414.459119596,
+            "share": 0.5090391179077307
+          },
+          {
+            "id": "yt-nusd-feb26-net",
+            "tvlAmount": 18187337.494465448,
+            "weightedTvl": 909366874.7232724,
+            "dailyPoints": 909366874.7232724,
+            "share": 9.671743240246885
+          },
+          {
+            "id": "lp-nusd-feb26",
+            "tvlAmount": 24699898.081985135,
+            "weightedTvl": 1234994904.0992568,
+            "dailyPoints": 1234994904.0992568,
+            "share": 0
+          },
+          {
+            "id": "lp-excluded-nusd",
+            "tvlAmount": 4939979.616397027,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          },
+          {
+            "id": "lp-nusd-feb26-net",
+            "tvlAmount": 19759918.465588108,
+            "weightedTvl": 987995923.2794054,
+            "dailyPoints": 987995923.2794054,
+            "share": 10.508017344789392
+          },
+          {
+            "id": "pt-nusd-feb26",
+            "tvlAmount": 18912547.752405446,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "MARCH 5, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-snusd-mar26",
+            "tvlAmount": 34892771.57286922,
+            "weightedTvl": 872319289.3217305,
+            "dailyPoints": 872319289.3217305,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-snusd",
+            "tvlAmount": 1744638.578643461,
+            "weightedTvl": 43615964.46608652,
+            "dailyPoints": 43615964.46608652,
+            "share": 0.4638858322391506
+          },
+          {
+            "id": "yt-snusd-mar26-net",
+            "tvlAmount": 33148132.994225755,
+            "weightedTvl": 828703324.8556439,
+            "dailyPoints": 828703324.8556439,
+            "share": 8.813830812543861
+          },
+          {
+            "id": "lp-snusd-mar26",
+            "tvlAmount": 24873177.58341172,
+            "weightedTvl": 621829439.5852929,
+            "dailyPoints": 621829439.5852929,
+            "share": 0
+          },
+          {
+            "id": "lp-excluded-snusd",
+            "tvlAmount": 4974635.5166823445,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          },
+          {
+            "id": "lp-snusd-mar26-net",
+            "tvlAmount": 19898542.066729378,
+            "weightedTvl": 497463551.66823447,
+            "dailyPoints": 497463551.66823447,
+            "share": 5.290867610039768
+          },
+          {
+            "id": "pt-snusd-mar26",
+            "tvlAmount": 33482051.242652625,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "HOLD",
+        "rows": [
+          {
+            "id": "hold-nusd",
+            "tvlAmount": 109916565.29700966,
+            "weightedTvl": 549582826.4850483,
+            "dailyPoints": 549582826.4850483,
+            "share": 5.845192006394634
+          },
+          {
+            "id": "lock-nusd-3mo",
+            "tvlAmount": 4657776.621181342,
+            "weightedTvl": 139733298.63544026,
+            "dailyPoints": 139733298.63544026,
+            "share": 1.4861599032029618
+          },
+          {
+            "id": "lock-nusd-6mo",
+            "tvlAmount": 39529662.51688427,
+            "weightedTvl": 2964724688.76632,
+            "dailyPoints": 2964724688.76632,
+            "share": 31.53188967488446
+          },
+          {
+            "id": "lock-nusd-9mo",
+            "tvlAmount": 1953227.2320699834,
+            "weightedTvl": 244153404.00874794,
+            "dailyPoints": 244153404.00874794,
+            "share": 2.5967396662908615
+          },
+          {
+            "id": "lock-nusd-12mo",
+            "tvlAmount": 887031.3598618774,
+            "weightedTvl": 133054703.9792816,
+            "dailyPoints": 133054703.9792816,
+            "share": 1.415128447675502
+          },
+          {
+            "id": "hold-snusd",
+            "tvlAmount": 35790888.091372944,
+            "weightedTvl": 35790888.091372944,
+            "dailyPoints": 35790888.091372944,
+            "share": 0.38066075374200137
+          },
+          {
+            "id": "lock-snusd-3mo",
+            "tvlAmount": 2153111.4130535144,
+            "weightedTvl": 17224891.304428115,
+            "dailyPoints": 17224891.304428115,
+            "share": 0.1831985864762075
+          },
+          {
+            "id": "lock-snusd-6mo",
+            "tvlAmount": 10161208.284150861,
+            "weightedTvl": 203224165.68301722,
+            "dailyPoints": 203224165.68301722,
+            "share": 2.161429017631263
+          },
+          {
+            "id": "lock-snusd-9mo",
+            "tvlAmount": 675546.606012556,
+            "weightedTvl": 20266398.18037668,
+            "dailyPoints": 20266398.18037668,
+            "share": 0.21554710761248888
+          },
+          {
+            "id": "lock-snusd-12mo",
+            "tvlAmount": 514430.19600416796,
+            "weightedTvl": 20577207.840166718,
+            "dailyPoints": 20577207.840166718,
+            "share": 0.21885278248325268
+          },
+          {
+            "id": "hold-curve-lp",
+            "tvlAmount": 9153416.104458662,
+            "weightedTvl": 45767080.52229331,
+            "dailyPoints": 45767080.52229331,
+            "share": 0.48676443355386817
+          },
+          {
+            "id": "curve-nusd-breakdown",
+            "tvlAmount": 4772117.205377686,
+            "weightedTvl": 23860586.02688843,
+            "dailyPoints": 23860586.02688843,
+            "share": 0
+          },
+          {
+            "id": "curve-usdc-breakdown",
+            "tvlAmount": 4641659.838077,
+            "weightedTvl": 23208299.190385003,
+            "dailyPoints": 23208299.190385003,
+            "share": 0
+          },
+          {
+            "id": "lock-curve-3mo",
+            "tvlAmount": 50.00701182189326,
+            "weightedTvl": 1000.1402364378652,
+            "dailyPoints": 1000.1402364378652,
+            "share": 0.000010637180482311327
+          },
+          {
+            "id": "lock-curve-6mo",
+            "tvlAmount": 260310.93198420183,
+            "weightedTvl": 13015546.599210091,
+            "dailyPoints": 13015546.599210091,
+            "share": 0.13842930541904302
+          },
+          {
+            "id": "hold-upnusd",
+            "tvlAmount": 60720808.45878118,
+            "weightedTvl": 1700182636.845873,
+            "dailyPoints": 1700182636.845873,
+            "share": 18.08261371968619
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "capturedAt": "2026-01-05T13:42:41.636Z",
+    "capturedAtUnix": 1767620561,
+    "summary": {
+      "s1RewardsIssued": 588329154380.0608,
+      "s1RewardsIssuedFormatted": "588.33B",
+      "participantCount": 3729,
+      "totalTvl": 352508938.1775402,
+      "totalTvlFormatted": "352.51M",
+      "weightedTvl": 8325305258.671246,
+      "weightedTvlFormatted": "8.33B",
+      "estDailyPoints": 8325305258.671246,
+      "estDailyPointsFormatted": "8.33B",
+      "estWeeklyPoints": 58277136810.698715,
+      "estWeeklyPointsFormatted": "58.28B",
+      "estMonthlyPoints": 249759157760.13736,
+      "estMonthlyPointsFormatted": "249.76B"
+    },
+    "tableCondensed": [
+      {
+        "category": "FEBRUARY 26, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-nusd-feb26",
+            "tvlAmount": 19137554.97970211,
+            "weightedTvl": 956877748.9851055,
+            "dailyPoints": 956877748.9851055,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-nusd",
+            "tvlAmount": 956877.7489851057,
+            "weightedTvl": 47843887.44925528,
+            "dailyPoints": 47843887.44925528,
+            "share": 0.5746802785330104
+          },
+          {
+            "id": "yt-nusd-feb26-net",
+            "tvlAmount": 18180677.230717003,
+            "weightedTvl": 909033861.5358502,
+            "dailyPoints": 909033861.5358502,
+            "share": 10.918925292127197
+          },
+          {
+            "id": "lp-nusd-feb26",
+            "tvlAmount": 9493660.878872951,
+            "weightedTvl": 474683043.94364756,
+            "dailyPoints": 474683043.94364756,
+            "share": 0
+          },
+          {
+            "id": "lp-excluded-nusd",
+            "tvlAmount": 1898732.1757745903,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          },
+          {
+            "id": "lp-nusd-feb26-net",
+            "tvlAmount": 7594928.703098361,
+            "weightedTvl": 379746435.1549181,
+            "dailyPoints": 379746435.1549181,
+            "share": 4.561351486294056
+          },
+          {
+            "id": "pt-nusd-feb26",
+            "tvlAmount": 18911474.314064033,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "MARCH 5, 2026 MARKET [ACTIVE]",
+        "rows": [
+          {
+            "id": "yt-snusd-mar26",
+            "tvlAmount": 36267485.88176174,
+            "weightedTvl": 906687147.0440434,
+            "dailyPoints": 906687147.0440434,
+            "share": 0
+          },
+          {
+            "id": "pendle-fee-snusd",
+            "tvlAmount": 1813374.294088087,
+            "weightedTvl": 45334357.35220218,
+            "dailyPoints": 45334357.35220218,
+            "share": 0.5445368781521139
+          },
+          {
+            "id": "yt-snusd-mar26-net",
+            "tvlAmount": 34454111.58767365,
+            "weightedTvl": 861352789.6918412,
+            "dailyPoints": 861352789.6918412,
+            "share": 10.346200684890164
+          },
+          {
+            "id": "lp-snusd-mar26",
+            "tvlAmount": 25507910.421499353,
+            "weightedTvl": 637697760.5374838,
+            "dailyPoints": 637697760.5374838,
+            "share": 0
+          },
+          {
+            "id": "lp-excluded-snusd",
+            "tvlAmount": 5101582.084299871,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          },
+          {
+            "id": "lp-snusd-mar26-net",
+            "tvlAmount": 20406328.337199483,
+            "weightedTvl": 510158208.4299871,
+            "dailyPoints": 510158208.4299871,
+            "share": 6.127801835237577
+          },
+          {
+            "id": "pt-snusd-mar26",
+            "tvlAmount": 34811105.604461074,
+            "weightedTvl": 0,
+            "dailyPoints": 0,
+            "share": 0
+          }
+        ]
+      },
+      {
+        "category": "HOLD",
+        "rows": [
+          {
+            "id": "hold-nusd",
+            "tvlAmount": 120284761.50718226,
+            "weightedTvl": 601423807.5359113,
+            "dailyPoints": 601423807.5359113,
+            "share": 7.224045111252788
+          },
+          {
+            "id": "lock-nusd-3mo",
+            "tvlAmount": 4657688.2092501195,
+            "weightedTvl": 139730646.27750358,
+            "dailyPoints": 139730646.27750358,
+            "share": 1.6783846590125537
+          },
+          {
+            "id": "lock-nusd-6mo",
+            "tvlAmount": 39528912.1816733,
+            "weightedTvl": 2964668413.625498,
+            "dailyPoints": 2964668413.625498,
+            "share": 35.610326847026286
+          },
+          {
+            "id": "lock-nusd-9mo",
+            "tvlAmount": 1953190.1567429018,
+            "weightedTvl": 244148769.59286273,
+            "dailyPoints": 244148769.59286273,
+            "share": 2.9326104209640707
+          },
+          {
+            "id": "lock-nusd-12mo",
+            "tvlAmount": 887014.5226105537,
+            "weightedTvl": 133052178.39158306,
+            "dailyPoints": 133052178.39158306,
+            "share": 1.5981657639880793
+          },
+          {
+            "id": "hold-snusd",
+            "tvlAmount": 36804274.691569485,
+            "weightedTvl": 36804274.691569485,
+            "dailyPoints": 36804274.691569485,
+            "share": 0.44207717973146854
+          },
+          {
+            "id": "lock-snusd-3mo",
+            "tvlAmount": 2153812.106747714,
+            "weightedTvl": 17230496.85398171,
+            "dailyPoints": 17230496.85398171,
+            "share": 0.2069653462380282
+          },
+          {
+            "id": "lock-snusd-6mo",
+            "tvlAmount": 10164515.077532286,
+            "weightedTvl": 203290301.5506457,
+            "dailyPoints": 203290301.5506457,
+            "share": 2.4418360076215597
+          },
+          {
+            "id": "lock-snusd-9mo",
+            "tvlAmount": 675766.451230087,
+            "weightedTvl": 20272993.53690261,
+            "dailyPoints": 20272993.53690261,
+            "share": 0.24351051291227088
+          },
+          {
+            "id": "lock-snusd-12mo",
+            "tvlAmount": 514597.60861099395,
+            "weightedTvl": 20583904.34443976,
+            "dailyPoints": 20583904.34443976,
+            "share": 0.24724504033050962
+          },
+          {
+            "id": "hold-curve-lp",
+            "tvlAmount": 11151444.61141952,
+            "weightedTvl": 55757223.0570976,
+            "dailyPoints": 55757223.0570976,
+            "share": 0.6697318755852646
+          },
+          {
+            "id": "curve-nusd-breakdown",
+            "tvlAmount": 5734773.818441546,
+            "weightedTvl": 28673869.09220773,
+            "dailyPoints": 28673869.09220773,
+            "share": 0
+          },
+          {
+            "id": "curve-usdc-breakdown",
+            "tvlAmount": 5677018.133766,
+            "weightedTvl": 28385090.66883,
+            "dailyPoints": 28385090.66883,
+            "share": 0
+          },
+          {
+            "id": "lock-curve-3mo",
+            "tvlAmount": 50.004400040914604,
+            "weightedTvl": 1000.0880008182921,
+            "dailyPoints": 1000.0880008182921,
+            "share": 0.000012012628603337368
+          },
+          {
+            "id": "lock-curve-6mo",
+            "tvlAmount": 260297.336387986,
+            "weightedTvl": 13014866.8193993,
+            "dailyPoints": 13014866.8193993,
+            "share": 0.15632900434303748
+          },
+          {
+            "id": "hold-upnusd",
+            "tvlAmount": 40066315.81042126,
+            "weightedTvl": 1121856842.6917953,
+            "dailyPoints": 1121856842.6917953,
+            "share": 13.475263763131354
+          }
+        ]
+      }
+    ]
+  }
+]

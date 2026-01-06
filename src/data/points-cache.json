@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-01-05T13:40:05.365Z",
+  "totalPoints": 588329154380.0608,
+  "totalPointsFormatted": "588.33B",
+  "participantCount": 3729,
+  "upNusdMultiplier": 16,
+  "raw": {
+    "__typename": "SeasonProgram",
+    "endBlock": "0",
+    "id": "ethereum-1-seasonProgram-Season_Neutrl_Origin",
+    "startBlock": "23582632",
+    "state": {
+      "__typename": "SeasonProgramState",
+      "id": "ethereum-1-seasonProgram-Season_Neutrl_Origin",
+      "participantCount": "3729",
+      "totalPoints": "588329154380.060850243058415668",
+      "upNusdMultiplier": "16"
+    }
+  }
+}
