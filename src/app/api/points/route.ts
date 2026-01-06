@@ -57,11 +57,45 @@ function formatLargeNumber(num: number): string {
 async function fetchWithPuppeteer(): Promise<CachedData> {
   // Dynamic import puppeteer only when needed
   const puppeteer = await import("puppeteer");
+  const { execSync } = await import("child_process");
 
-  const browser = await puppeteer.default.launch({
+  // Determine executable path - check environment variable first
+  let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+  
+  // If not set, try to find chromium in PATH (for Railway/Nix)
+  if (!executablePath) {
+    try {
+      // Try to find chromium using which command
+      const chromiumPath = execSync("which chromium", { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+      if (chromiumPath) {
+        executablePath = chromiumPath;
+      }
+    } catch (error) {
+      // If which fails, try chromium-browser
+      try {
+        const chromiumPath = execSync("which chromium-browser", { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+        if (chromiumPath) {
+          executablePath = chromiumPath;
+        }
+      } catch (e) {
+        // Let Puppeteer auto-detect if we can't find it
+        console.log("Chromium not found in PATH, using Puppeteer auto-detection");
+      }
+    }
+  }
+
+  const launchOptions: any = {
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+  };
+
+  // Only set executablePath if we found one
+  if (executablePath) {
+    launchOptions.executablePath = executablePath;
+    console.log(`Using Chromium at: ${executablePath}`);
+  }
+
+  const browser = await puppeteer.default.launch(launchOptions);
 
   try {
     const page = await browser.newPage();
