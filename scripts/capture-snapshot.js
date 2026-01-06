@@ -24,6 +24,23 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const CRON_SECRET = process.env.CRON_SECRET;
 
+// Validate required environment variables
+if (!BASE_URL || BASE_URL === 'http://localhost:3000') {
+  console.error('ERROR: BASE_URL environment variable is not set!');
+  console.error('Please set BASE_URL to your Railway deployment URL (e.g., https://your-app.railway.app)');
+  process.exit(1);
+}
+
+if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+  console.error('ERROR: Supabase configuration missing!');
+  console.error('Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY');
+  process.exit(1);
+}
+
+if (!CRON_SECRET) {
+  console.warn('WARNING: CRON_SECRET not set. Snapshot saves via API will be unauthenticated.');
+}
+
 // Initialize Supabase client
 const supabase = SUPABASE_URL && SUPABASE_SERVICE_KEY
   ? createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)

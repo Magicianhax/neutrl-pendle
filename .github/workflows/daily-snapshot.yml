@@ -25,6 +25,16 @@ jobs:
       - name: Install dependencies
         run: npm ci --production=false
 
+      - name: Verify secrets (debug)
+        run: |
+          echo "Checking if BASE_URL is set..."
+          if [ -z "${{ secrets.BASE_URL }}" ]; then
+            echo "❌ BASE_URL secret is not set!"
+            exit 1
+          else
+            echo "✅ BASE_URL is configured"
+          fi
+
       - name: Capture and save snapshot
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
