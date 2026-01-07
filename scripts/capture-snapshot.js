@@ -48,39 +48,125 @@ const supabase = SUPABASE_URL && SUPABASE_SERVICE_KEY
   ? createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
   : null;
 
-async function fetchTvlData() {
-  console.log(`[${new Date().toISOString()}] Fetching TVL data from ${BASE_URL}/api/tvl...`);
+async function warmupApp() {
+  console.log(`[${new Date().toISOString()}] Warming up Railway app...`);
 
-  const response = await fetch(`${BASE_URL}/api/tvl`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // Add timeout
-    signal: AbortSignal.timeout(120000), // 2 minute timeout
-  });
+  try {
+    // Try to hit the homepage or a lightweight endpoint to wake up the app
+    const response = await fetch(`${BASE_URL}/`, {
+      signal: AbortSignal.timeout(30000), // 30 second timeout
+    });
 
-  if (!response.ok) {
-    throw new Error(`TVL API returned ${response.status}: ${await response.text()}`);
+    if (response.ok) {
+      console.log(`[${new Date().toISOString()}] App is responding (${response.status})`);
+    } else {
+      console.log(`[${new Date().toISOString()}] App responded with status ${response.status}, continuing anyway...`);
+    }
+
+    // Give the app a moment to fully initialize
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  } catch (error) {
+    console.warn(`[${new Date().toISOString()}] Warmup request failed:`, error.message);
+    console.warn(`[${new Date().toISOString()}] Continuing anyway, will retry API calls if needed...`);
   }
-
-  return response.json();
 }
 
-async function fetchPointsData() {
+async function fetchTvlData(retryCount = 0) {
+  const MAX_RETRIES = 4;
+  const RETRY_DELAY = 10000; // 10 seconds base delay
+
+  console.log(`[${new Date().toISOString()}] Fetching TVL data from ${BASE_URL}/api/tvl...`);
+
+  try {
+    const response = await fetch(`${BASE_URL}/api/tvl`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Add timeout - increased for cold starts
+      signal: AbortSignal.timeout(180000), // 3 minute timeout
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+
+      // Check if this is a Railway deployment issue (could be cold start)
+      if (errorText.includes('Application not found') || errorText.includes('request_id')) {
+        const error = new Error(`Railway deployment unavailable (${response.status}): ${errorText}`);
+        error.isRailwayError = true;
+        throw error;
+      }
+
+      throw new Error(`TVL API returned ${response.status}: ${errorText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Retry on network errors, timeouts, or Railway cold start errors
+    const shouldRetry = retryCount < MAX_RETRIES && (
+      error.name === 'AbortError' ||
+      error.message.includes('fetch failed') ||
+      error.isRailwayError // Retry on Railway errors (might be cold start)
+    );
+
+    if (shouldRetry) {
+      const delay = RETRY_DELAY * Math.pow(2, retryCount);
+      const reason = error.isRailwayError ? 'Railway cold start detected' : 'Network error';
+      console.log(`[${new Date().toISOString()}] ${reason}, retrying in ${delay}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchTvlData(retryCount + 1);
+    }
+
+    throw error;
+  }
+}
+
+async function fetchPointsData(retryCount = 0) {
+  const MAX_RETRIES = 2; // Points API can fail, we'll continue without it
+  const RETRY_DELAY = 10000; // 10 seconds base delay
+
   console.log(`[${new Date().toISOString()}] Fetching points data from ${BASE_URL}/api/points...`);
 
-  const response = await fetch(`${BASE_URL}/api/points`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    signal: AbortSignal.timeout(120000), // 2 minute timeout (puppeteer can be slow)
-  });
+  try {
+    const response = await fetch(`${BASE_URL}/api/points`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Longer timeout - puppeteer can be slow on cold starts
+      signal: AbortSignal.timeout(180000), // 3 minute timeout
+    });
 
-  if (!response.ok) {
-    throw new Error(`Points API returned ${response.status}: ${await response.text()}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+
+      // Check if this is a Railway deployment issue (could be cold start)
+      if (errorText.includes('Application not found') || errorText.includes('request_id')) {
+        const error = new Error(`Railway deployment unavailable (${response.status}): ${errorText}`);
+        error.isRailwayError = true;
+        throw error;
+      }
+
+      throw new Error(`Points API returned ${response.status}: ${errorText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Retry on network errors or Railway cold start errors
+    const shouldRetry = retryCount < MAX_RETRIES && (
+      error.name === 'AbortError' ||
+      error.message.includes('fetch failed') ||
+      error.isRailwayError
+    );
+
+    if (shouldRetry) {
+      const delay = RETRY_DELAY * Math.pow(2, retryCount);
+      const reason = error.isRailwayError ? 'Railway cold start detected' : 'Network error';
+      console.log(`[${new Date().toISOString()}] ${reason}, retrying in ${delay}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchPointsData(retryCount + 1);
+    }
+
+    throw error;
   }
-
-  return response.json();
 }
 
 async function saveToSupabase(snapshot) {
@@ -351,6 +437,9 @@ async function main() {
   console.log('='.repeat(60));
 
   try {
+    // Warmup the Railway app to handle cold starts
+    await warmupApp();
+
     // Fetch TVL data (required)
     const tvlData = await fetchTvlData();
 
@@ -404,6 +493,28 @@ async function main() {
 
   } catch (error) {
     console.error(`[${new Date().toISOString()}] Error capturing snapshot:`, error.message);
+
+    // Provide helpful context for common errors
+    if (error.message.includes('Railway deployment unavailable')) {
+      console.error('');
+      console.error('💡 This error indicates the Railway application is not responding after retries.');
+      console.error('   Possible causes:');
+      console.error('   - Railway app cold start taking too long (>3 minutes)');
+      console.error('   - Railway app is still deploying');
+      console.error('   - Railway app crashed or failed to start');
+      console.error('   - BASE_URL is incorrect or pointing to wrong deployment');
+      console.error('   - Network connectivity issues');
+      console.error('');
+      console.error(`   Current BASE_URL: ${BASE_URL}`);
+      console.error('');
+      console.error('   Check your Railway deployment status and logs.');
+      console.error('   The script retries up to 4 times with 10s+ delays for cold starts.');
+    } else if (error.message.includes('Upstream API returned 404')) {
+      console.error('');
+      console.error('💡 The external Neutrl points API endpoint has changed or is unavailable.');
+      console.error('   The snapshot can continue without points data once the Railway app is responding.');
+    }
+
     process.exit(1);
   }
 }
