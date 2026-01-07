@@ -48,22 +48,44 @@ const supabase = SUPABASE_URL && SUPABASE_SERVICE_KEY
   ? createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
   : null;
 
-async function fetchTvlData() {
+async function fetchTvlData(retryCount = 0) {
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY = 5000; // 5 seconds base delay
+
   console.log(`[${new Date().toISOString()}] Fetching TVL data from ${BASE_URL}/api/tvl...`);
 
-  const response = await fetch(`${BASE_URL}/api/tvl`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // Add timeout
-    signal: AbortSignal.timeout(120000), // 2 minute timeout
-  });
+  try {
+    const response = await fetch(`${BASE_URL}/api/tvl`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Add timeout
+      signal: AbortSignal.timeout(120000), // 2 minute timeout
+    });
 
-  if (!response.ok) {
-    throw new Error(`TVL API returned ${response.status}: ${await response.text()}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+
+      // Check if this is a Railway deployment issue
+      if (errorText.includes('Application not found') || errorText.includes('request_id')) {
+        throw new Error(`Railway deployment unavailable (${response.status}): ${errorText}`);
+      }
+
+      throw new Error(`TVL API returned ${response.status}: ${errorText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Retry on network errors or 5xx errors
+    if (retryCount < MAX_RETRIES && (error.name === 'AbortError' || error.message.includes('fetch failed'))) {
+      const delay = RETRY_DELAY * Math.pow(2, retryCount);
+      console.log(`[${new Date().toISOString()}] Network error, retrying in ${delay}ms... (attempt ${retryCount + 1}/${MAX_RETRIES})`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchTvlData(retryCount + 1);
+    }
+
+    throw error;
   }
-
-  return response.json();
 }
 
 async function fetchPointsData() {
@@ -77,7 +99,14 @@ async function fetchPointsData() {
   });
 
   if (!response.ok) {
-    throw new Error(`Points API returned ${response.status}: ${await response.text()}`);
+    const errorText = await response.text();
+
+    // Check if this is a Railway deployment issue
+    if (errorText.includes('Application not found') || errorText.includes('request_id')) {
+      throw new Error(`Railway deployment unavailable (${response.status}): ${errorText}`);
+    }
+
+    throw new Error(`Points API returned ${response.status}: ${errorText}`);
   }
 
   return response.json();
@@ -404,6 +433,26 @@ async function main() {
 
   } catch (error) {
     console.error(`[${new Date().toISOString()}] Error capturing snapshot:`, error.message);
+
+    // Provide helpful context for common errors
+    if (error.message.includes('Railway deployment unavailable')) {
+      console.error('');
+      console.error('💡 This error indicates the Railway application is not responding.');
+      console.error('   Possible causes:');
+      console.error('   - Railway app is still deploying');
+      console.error('   - Railway app crashed or failed to start');
+      console.error('   - BASE_URL is incorrect or pointing to wrong deployment');
+      console.error('   - Network connectivity issues');
+      console.error('');
+      console.error(`   Current BASE_URL: ${BASE_URL}`);
+      console.error('');
+      console.error('   Check your Railway deployment status and logs.');
+    } else if (error.message.includes('Upstream API returned 404')) {
+      console.error('');
+      console.error('💡 The external Neutrl points API endpoint has changed or is unavailable.');
+      console.error('   The snapshot can continue without points data once the Railway app is responding.');
+    }
+
     process.exit(1);
   }
 }
