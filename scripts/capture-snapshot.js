@@ -351,11 +351,17 @@ async function main() {
   console.log('='.repeat(60));
 
   try {
-    // Fetch data from both APIs in parallel
-    const [tvlData, pointsData] = await Promise.all([
-      fetchTvlData(),
-      fetchPointsData(),
-    ]);
+    // Fetch TVL data (required)
+    const tvlData = await fetchTvlData();
+
+    // Fetch points data (optional - continue if it fails)
+    let pointsData = null;
+    try {
+      pointsData = await fetchPointsData();
+    } catch (pointsError) {
+      console.warn(`[${new Date().toISOString()}] Warning: Failed to fetch points data:`, pointsError.message);
+      console.warn(`[${new Date().toISOString()}] Continuing with snapshot using null points data...`);
+    }
 
     // Calculate row data using the same logic as capture-tvl-data.js
     const rowData = calculateRowData(tvlData);

@@ -123,6 +123,12 @@ async function fetchWithPuppeteer(retryCount = 0): Promise<CachedData> {
 
     const status = response?.status();
 
+    // Handle 404 - upstream API endpoint may have changed
+    if (status === 404) {
+      await browser.close();
+      throw new Error(`Upstream API returned 404 - endpoint may have changed or been removed`);
+    }
+
     // Handle 429 rate limit with retry
     if (status === 429) {
       await browser.close();
