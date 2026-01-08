@@ -92,7 +92,7 @@ export const POINTS_INCENTIVES: PointsIncentive[] = [
     name: "Hold upNUSD",
     protocol: "K3 Capital",
     protocolUrl: "https://k3.capital",
-    pointsPerUnit: 28,
+    pointsPerUnit: 18,
     isVariable: false,
     unit: "day",
   },

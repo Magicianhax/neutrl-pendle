@@ -60,7 +60,7 @@ const TVL_CATEGORIES = [
       { id: "curve-usdc-breakdown", name: "USDC in pool", type: "subrow", status: "display", boost: 5 },
       { id: "lock-curve-3mo", name: "Lock Curve LP (3 mo)", type: "subrow", status: "locked", boost: 4, baseBoost: 5 },
       { id: "lock-curve-6mo", name: "Lock Curve LP (5-6 mo Max)", type: "subrow", status: "locked", boost: 10, baseBoost: 5 },
-      { id: "hold-upnusd", name: "Hold upNUSD", type: "row", status: "active", boost: 28 },
+      { id: "hold-upnusd", name: "Hold upNUSD", type: "row", status: "active", boost: 18 },
     ],
   },
 ];

@@ -451,7 +451,7 @@ export async function GET() {
         } : null,
       },
 
-      // upNUSD (K3 protocol) - 28 points per token
+      // upNUSD (K3 protocol) - 18 points per token
       upnusd: {
         contract: UPNUSD_CONTRACT,
         totalSupply: upnusdTotalSupply || 0,

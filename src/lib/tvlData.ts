@@ -79,8 +79,8 @@ export const TVL_CATEGORIES: TvlCategory[] = [
       // Curve LP Locked - by duration bucket (base 5x × lock boost)
       { id: "lock-curve-3mo", name: "Lock Curve LP (3 mo)", type: "subrow", status: "locked", boost: 4, baseBoost: 5, category: "curve" },
       { id: "lock-curve-6mo", name: "Lock Curve LP (5-6 mo Max)", type: "subrow", status: "locked", boost: 10, baseBoost: 5, category: "curve" },
-      // upNUSD - 28 points per token
-      { id: "hold-upnusd", name: "Hold upNUSD", type: "row", status: "active", boost: 28, category: "k3" },
+      // upNUSD - 18 points per token
+      { id: "hold-upnusd", name: "Hold upNUSD", type: "row", status: "active", boost: 18, category: "k3" },
     ],
   },
 ];
